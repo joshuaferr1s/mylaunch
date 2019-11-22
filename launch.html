@@ -6,8 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Launch | MyLaunch</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
+  <link rel="stylesheet" href="./launch.css">
   <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
   <script defer src="navbar.js"></script>
+  <script defer src="launch.js"></script>
 </head>
 <body>
   <nav class="navbar is-primary" role="navigation" aria-label="main navigation">
@@ -28,5 +30,28 @@
       </div>
     </div>
   </nav>
+  <section class="hero is-link is-fullheight-with-navbar">
+    <div class="hero-body">
+      <div class="container has-text-centered">
+        <h2 class="title is-size-4">
+          Enter your birthday to unlock your destiny!
+        </h2>
+        <p class="subtitle is-size-6">
+          Powered by the <a href="https://www.launchlibrary.net" rel="noopener nofollow" target="_blank">Launch Library API</a>
+        </p>
+        <input type="date">
+        <img id="logo" src="./logo.svg" alt="MyLaunch logo" width="100rem" height="100rem" style="cursor: pointer;">
+      </div>
+    </div>
+    <footer class="hero-foot has-text-centered columns" style="margin-bottom: 0;">
+      <small class="column">
+        &copy; Copyright
+        <script>document.write(new Date().getFullYear());</script>, Joshua Ferris</small>
+      <small class="column"><a class="has-text-white" href="https://github.com/joshuaferr1s/mylaunch"
+          rel="noopener nofollow" target="_blank">Source Code on Github</a></small>
+      <small class="column">Made with 💜 by <a class="has-text-white" href="https://jajjferris.com" rel="noopener nofollow"
+          target="_blank">Joshua Ferris</a></small>
+    </footer>
+  </section>
 </body>
 </html>
