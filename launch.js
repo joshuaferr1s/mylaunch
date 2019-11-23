@@ -30,13 +30,7 @@ const appendRocketToDom = ({ name, rocket: { imageURL }, vidURLs, infoURLs, fail
 `;
 };
 
-dateElement.setAttribute('max', getFormattedDate(new Date()));
-
-errorButtonElement.addEventListener('click', () => {
-  errorElement.classList.toggle('hidden', true);
-});
-
-logoElement.addEventListener('click', async () => {
+const fetchRocketData = async () => {
   try {
     if (!dateElement.validity.valid) throw new Error(dateElement.validationMessage);
     logoElement.classList.toggle('animate', true);
@@ -47,11 +41,37 @@ logoElement.addEventListener('click', async () => {
     if (data.status === 'error' && data.msg === 'None found') throw new Error('Sorry no rockets were launched on your birthday');
     else if (data.status === 'error') throw new Error(data.msg);
     if (data.launches.length <= 0) throw new Error('No launches found for that date.');
-    data.launches.forEach((launch) => appendRocketToDom(launch));
+    errorElement.classList.toggle('hidden', true);
+    data.launches.forEach((launch) => {
+      if (getFormattedDate(new Date(launch.net)) !== dateElement.value) {
+        if (data.launches.length === 1) {
+          throw new Error('No launches found for that date.')
+        } else {
+          return;
+        }
+      } else {
+        appendRocketToDom(launch);
+      }
+    });
   } catch (error) {
+    launchesContainer.innerHTML = '';
     errorElement.classList.toggle('hidden', false);
     errorMessageElement.textContent = error.message;
   }
   logoElement.classList.toggle('animate', false);
+};
+
+dateElement.setAttribute('max', getFormattedDate(new Date()));
+
+errorButtonElement.addEventListener('click', () => {
+  errorElement.classList.toggle('hidden', true);
 });
+
+dateElement.addEventListener('keyup', (event) => {
+  if (event.keyCode === 13) {
+    fetchRocketData();
+  }
+});
+
+logoElement.addEventListener('click', fetchRocketData());
 

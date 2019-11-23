@@ -7,7 +7,6 @@
   <title>Launch | MyLaunch</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
   <link rel="stylesheet" href="./launch.css">
-  <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
   <script defer src="navbar.js"></script>
   <script defer src="launch.js"></script>
 </head>
@@ -25,7 +24,7 @@
     </div>
     <div class="navbar-menu" id="navMenu">
       <div class="navbar-end">
-        <a class="navbar-item is-size-5">About</a>
+        <a href="./about.html" class="navbar-item is-size-5">About</a>
         <a href="./launch.html" class="navbar-item is-size-5 is-active">Launch!</a>
       </div>
     </div>
@@ -33,28 +32,28 @@
   <section class="hero is-link is-fullheight-with-navbar">
     <div class="hero-body">
       <div class="container has-text-centered">
-        <h2 class="title is-size-4">
+        <h2 class="title is-size-3">
           Enter your birthday to unlock your destiny!
         </h2>
-        <p class="subtitle is-size-6">
-          Powered by the <a href="https://www.launchlibrary.net" rel="noopener noreferrer" target="_blank">Launch Library API</a>
+        <p class="subtitle is-size-5">
+          Powered by the <a href="https://www.launchlibrary.net" class="has-text-primary" rel="noopener noreferrer" target="_blank">Launch Library API</a>
         </p>
         <div id="error" class="notification is-danger hidden">
           <button id="errorButton" class="delete"></button>
           <span id="errorMessage">Error</span>
         </div>
         <input type="date">
-        <img id="logo" src="./logo.svg" alt="MyLaunch logo" width="100rem" height="100rem" style="cursor: pointer;">
-        <div id="launches" class="columns"></div>
+        <img id="logo" src="./logo.svg" alt="MyLaunch logo" width="100rem" height="100rem" style="cursor: pointer; margin-bottom: 1.5rem;">
+        <div id="launches" class="columns is-centered"></div>
       </div>
     </div>
     <footer class="hero-foot has-text-centered columns" style="margin-bottom: 0;">
       <small class="column">
         &copy; Copyright
         <script>document.write(new Date().getFullYear());</script>, Joshua Ferris</small>
-      <small class="column"><a class="has-text-white" href="https://github.com/joshuaferr1s/mylaunch"
+      <small class="column"><a class="has-text-primary" href="https://github.com/joshuaferr1s/mylaunch"
           rel="noopener noreferrer" target="_blank">Source Code on Github</a></small>
-      <small class="column">Made with 💜 by <a class="has-text-white" href="https://jajjferris.com" rel="noopener noreferrer"
+      <small class="column">Made with 💜 by <a class="has-text-primary" href="https://jajjferris.com" rel="noopener noreferrer"
           target="_blank">Joshua Ferris</a></small>
     </footer>
   </section>
