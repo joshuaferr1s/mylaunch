@@ -3,13 +3,16 @@ const dateElement = document.querySelector('input[type="date"');
 
 const getFormattedDate = (date) => {
   return new Date(date.getTime() - (date.getTimezoneOffset() * 60000))
-    .toISOString()
-    .split("T")[0];
+  .toISOString()
+  .split("T")[0];
 };
 
+dateElement.setAttribute('max', getFormattedDate(new Date()));
+
 logo.addEventListener('click', async () => {
-  logo.classList.toggle('animate');
   try {
+    if (!dateElement.validity.valid) throw new Error(dateElement.validationMessage);
+    logo.classList.toggle('animate', true);
     const [year, month, day] = dateElement.value.split('-');
     const nextDay = new Date(Number(year), Number(month - 1), Number(day) + 1);
     const result = await fetch(`https://launchlibrary.net/1.3/launch/${dateElement.value}/${getFormattedDate(nextDay)}`);
@@ -26,6 +29,6 @@ logo.addEventListener('click', async () => {
   } catch (error) {
     console.log(error);
   }
-  logo.classList.toggle('animate');
+  logo.classList.toggle('animate', false);
 });
 
