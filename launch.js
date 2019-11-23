@@ -73,5 +73,5 @@ dateElement.addEventListener('keyup', (event) => {
   }
 });
 
-logoElement.addEventListener('click', fetchRocketData());
+logoElement.addEventListener('click', fetchRocketData);
 
