@@ -8,6 +8,10 @@ const allBirthdayLaunchesContainer = document.querySelector('#allBirthdayLaunche
 const allBirthdayLaunchesPagination = document.querySelector('#allBirthdayLaunchesPagination');
 const prevPaginationButton = document.querySelector('#prevPaginationButton');
 const nextPaginationButton = document.querySelector('#nextPaginationButton');
+
+const firstPaginationButton = document.querySelector('#firstPaginationButton');
+const lastPaginationButton = document.querySelector('#lastPaginationButton');
+
 const allLaunchesSince = document.querySelector('#allLaunchesSince');
 const paginationInfo = document.querySelector('#paginationInfo');
 
@@ -57,24 +61,42 @@ const makeRocketFetch = async (startDate, endDate, offset = 0) => {
 const updatePaginationButtons = () => {
   const upperLimit = launchResponse.count < FETCH_LIMIT ? launchResponse.count : FETCH_LIMIT;
   paginationInfo.textContent = `Showing: ${launchResponse.offset}-${launchResponse.offset + upperLimit}/${launchResponse.total}`;
+
+  if (launchResponse.offset === 0) firstPaginationButton.setAttribute('disabled', true);
+  else firstPaginationButton.removeAttribute('disabled');
+
   if (launchResponse.offset === 0) prevPaginationButton.setAttribute('disabled', true);
   else prevPaginationButton.removeAttribute('disabled');
+
   if (launchResponse.count < FETCH_LIMIT) nextPaginationButton.setAttribute('disabled', true);
   else nextPaginationButton.removeAttribute('disabled');
+
+  if (launchResponse.count < FETCH_LIMIT) lastPaginationButton.setAttribute('disabled', true);
+  else lastPaginationButton.removeAttribute('disabled');
 };
 
 const handlePaginationButton = async (direction) => {
   try {
-    const { startDate, endDate, offset } = launchResponse;
+    const { startDate, endDate, offset, total } = launchResponse;
+    const lastPage = (Math.floor(total/FETCH_LIMIT) * FETCH_LIMIT);
+
     let data;
     switch (direction) {
-      case 'next':
-        if (nextPaginationButton.getAttribute('disabled')) return;
-        data = await makeRocketFetch(startDate, endDate, offset + FETCH_LIMIT);
+      case 'first':
+        if (firstPaginationButton.getAttribute('disabled')) return;
+        data = await makeRocketFetch(startDate, endDate, 0);
         break;
       case 'prev':
         if (prevPaginationButton.getAttribute('disabled')) return;
         data = await makeRocketFetch(startDate, endDate, offset - FETCH_LIMIT);
+        break;
+      case 'next':
+        if (nextPaginationButton.getAttribute('disabled')) return;
+        data = await makeRocketFetch(startDate, endDate, offset + FETCH_LIMIT);
+        break;
+      case 'last':
+        if (lastPaginationButton.getAttribute('disabled')) return;
+        data = await makeRocketFetch(startDate, endDate, lastPage);
         break;
       default:
         break;
@@ -140,8 +162,10 @@ const fetchRocketData = async () => {
   logoElement.classList.toggle('animate', false);
 };
 
+firstPaginationButton.addEventListener('click', () => handlePaginationButton('first'));
 prevPaginationButton.addEventListener('click', () => handlePaginationButton('prev'));
 nextPaginationButton.addEventListener('click', () => handlePaginationButton('next'));
+lastPaginationButton.addEventListener('click', () => handlePaginationButton('last'));
 
 errorButtonElement.addEventListener('click', () => {
   errorElement.classList.toggle('hidden', true);
