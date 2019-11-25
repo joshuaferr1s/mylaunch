@@ -15,3 +15,7 @@ I have always loved space and so this will be a fun thing for me to use and show
 ## Tech Stack
 
 * [Bulma](https://bulma.io/)
+
+## Contributors
+
+* [8ivek](https://github.com/8ivek) - Thanks for adding the first and last pagination buttons to make everyone's life easier
