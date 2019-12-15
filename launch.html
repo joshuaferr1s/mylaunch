@@ -42,10 +42,29 @@
           <button id="errorButton" class="delete"></button>
           <span id="errorMessage">Error</span>
         </div>
-        <input type="text" name="input" placeholder="YYYY-MM-DD" required autofocus pattern="([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))" maxlength="10" title="Enter a date in this format YYYY-MM-DD" />
+        <div style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: space-around;">
+          <div>
+            <input
+              id="year" type="text" name="year" placeholder="YYYY" required autofocus
+              pattern="([12]\d{3})" maxlength="4" style="display: inline;"
+              title="Enter a year in this format YYYY"
+            />
+            <input
+              id="month" type="text" name="month" placeholder="MM" required
+              pattern="(0[1-9]|1[0-2])" maxlength="2" style="display: inline;"
+              title="Enter a month in this format MM"
+            />
+            <input
+              id="day" type="text" name="day" placeholder="DD" required
+              pattern="(0[1-9]|[12]\d|3[01])" maxlength="2" style="display: inline;"
+              title="Enter a day in this format DD"
+            />
+          </div>
+        </div>
         <img id="logo" src="./logo.svg" alt="MyLaunch logo" width="100rem" height="100rem" style="cursor: pointer; margin-bottom: 1.5rem;">
         <div id="birthdayLaunches" class="columns is-centered" style="margin-bottom: 1.5rem;"></div>
         <div id="allLaunchesSince"  style="display: none;">
+          <h2 class="title is-size-3">All Rocket Launches Since Your Birthday!</h2>
           <div id="allBirthdayLaunches" class="columns is-multiline is-centered" style="margin-bottom: 1.5rem;"></div>
           <div id="allBirthdayLaunchesPagination" style="display: flex; flex-direction: row; justify-content: space-between;">
             <a id="firstPaginationButton" class="button is-outlined">First page</a>
